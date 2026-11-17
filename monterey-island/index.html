@@ -88,6 +88,8 @@ td.n{font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums}
 .legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 10px;margin:8px 0;font-size:12.5px}
 .legend span{display:flex;align-items:center;gap:6px}.legend i{width:12px;height:12px;border-radius:2px;flex:none}
 h3{font-family:var(--display);font-size:14px;margin:14px 0 2px}
+#clkey{pointer-events:none;position:absolute;left:8px;top:48px;display:flex;flex-wrap:wrap;gap:4px 10px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:5px 8px;font-size:12px;max-width:calc(100% - 16px)}
+#clkey[hidden]{display:none}#clkey b{font-weight:600}#clkey i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:4px;vertical-align:-1px}
 .grp{display:contents}
 button{touch-action:manipulation}
 @media (max-width:820px){
@@ -103,6 +105,7 @@ button{touch-action:manipulation}
   .grp.tg{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .grp.sl .chip{flex:1;min-width:0;padding:4px 9px;font-size:12px;white-space:nowrap}.chip input{flex:1;min-width:0;width:auto;height:28px}
   #stage.issue .grp{display:none}
+  #clkey{left:6px;top:54px;font-size:11.5px;max-width:calc(100% - 12px)}
   #iss{margin:0;flex:none;padding:6px;gap:6px}#iss .key{display:none}#iss .ttl{font-size:14px}#iss p{font-size:12.5px;margin:1px 0 0;line-height:1.3}
   #iss button{padding:0 10px;min-width:40px}#iss #i-x{font-size:12px;padding:0 8px}#iss p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .tabs button{padding:13px 2px;font-size:14px;min-height:44px}
@@ -122,13 +125,14 @@ button{touch-action:manipulation}
     <div class="bar top" id="views">
       <button data-v="drawer">C Drawers</button><button data-v="seat">A Seating</button><button data-v="end">D End</button><button data-v="endb">B End</button><button data-v="top">Plan</button><button data-v="s12">Section S12</button><button data-v="s13">Section S13</button><button data-v="under">Knee space</button><button data-v="leg">Leg</button>
     </div>
+    <div id="clkey" hidden><b>Rip:</b><span><i style="background:#8e3fb0"></i>2-1/2 oak</span><span><i style="background:#d4279a"></i>2-1/4 oak</span><span><i style="background:#1f6fc0"></i>1-1/2 oak</span><span><i style="background:#3d8f3a"></i>3 poplar</span></div>
     <div class="bar bot">
     <div id="iss" hidden><button id="i-prev" aria-label="Previous issue">&#8249;</button><div class="mid"><div class="ttl" id="i-t"></div><p id="i-s"></p>
       <div class="key"><span><i style="background:#c8321e"></i>does not fit</span><span><i style="background:#1f6fc0"></i>what the paper says</span><span><i style="background:#d2691e"></i>no CV part</span></div></div>
       <button id="i-next" aria-label="Next issue">&#8250;</button><button id="i-x">Close</button></div>
       <div class="grp sl"><label class="chip" for="explode">Pull apart <input id="explode" type="range" min="0" max="1" step="0.01" value="0"></label>
       <label class="chip" for="cut">Cut through <input id="cut" type="range" min="0" max="1" step="0.005" value="0"></label>
-      </div><div class="grp tg"><button id="t-dim" aria-pressed="false">Dimensions</button><button id="t-sd" aria-pressed="true">Shop drawing only parts</button>
+      </div><div class="grp tg"><button id="t-call" aria-pressed="false">Cut list callouts</button><button id="t-dim" aria-pressed="false">Dimensions</button><button id="t-sd" aria-pressed="true">Shop drawing only parts</button>
       <button id="t-mark" aria-pressed="false">Mark them orange</button>
       <button id="t-mat" aria-pressed="false">Color by material</button>
       <button id="t-pins" aria-pressed="true">Issue pins</button></div>
@@ -1556,7 +1560,7 @@ cab(6.5,22.125,'#6','Drawer and door base');cab(28.625,31.5,'#5','3 drawer bank'
 LY='face';const fx=[0,0,-0.9];
 [[5,'#7'],[113.75,'#2']].forEach(b=>{box(I('Base filler, face',b[1],'1-1/2 x 30-1/2, cut over size, finishes 29-3/4',OAK54,'Stands between the leg and the end box.'),b[0],b[0]+1.5,1.5,F,4,33.75,M.oakV,fx);
   box(I('Base filler, return',b[1],'3-3/4 x 30-1/2 (2)',MAPLE),b[0]+(b[0]<50?0:0.75),b[0]+(b[0]<50?0.75:1.5),F,F+3.75,4,33.75,M.mapleV,fx)});
-box(I('Top rail, face','#9','1-1/2 x 111-1/4, cut over size, finishes between the base fillers',OAK44,'Face is 3/4 stock while the other face parts are 7/8. See issue 4.'),6.5,113.75,1.5,F-0.125,32.25,33.75,M.oakH,fx);
+box(I('Top rail, face','#9','1-1/2 x 111-1/4, cut over size, finishes between the base fillers',OAK54,'The CV sheet says 3/4. The face frame cut list mills it to 7/8 like the other face parts, so it is drawn 7/8. See issue 4.'),6.5,113.75,1.5,F,32.25,33.75,M.oakH,fx);
 box(I('Top rail, returns','#9','3-3/4 x 55, 56-1/4, 65, 46-1/4',MAPLE),6.5,113.75,F,F+3.75,33.0,33.75,M.mapleH,[0,0.5,0]);
 box(I('Bottom filler, face','#8','2-1/4 x 111-1/4, edge band both sides, cut to 1-1/2 wide and to length per elevation',OAK54,'Return behind it: 3-15/16 x 111-1/4, from the 4x10 sheet. Bodie A.17 draws this member 2-1/4 tall with the baseboard ogee lapping its lower 3/4.'),6.5,113.75,1.5,F,4,5.5,M.oakH,fx);
 
@@ -1615,16 +1619,17 @@ run(sI,'x',-0.25,120.5,-0.25,-1,STP,stone2,[0,5,0]);run(sI,'x',-0.25,120.5,48.25
 run(sI,'d',-0.25,48.25,-0.25,-1,STP,stone2,[0,5,0]);run(sI,'d',-0.25,48.25,120.5,1,STP,stone2,[0,5,0]);
 
 /* ---------- state and painting ---------- */
-const S={dim:false,step:-1,showSD:true,mark:false,mat:false,sel:null,issue:-1,pins:true};
+const S={call:false,dim:false,step:-1,showSD:true,mark:false,mat:false,sel:null,issue:-1,pins:true};
 const CLS=[['Pre-finished maple ply',/maple ply/i,0xe3c98a],['Solid maple drawer boxes',/solid maple/i,0xf2e2a0],['White oak ply',/oak ply/i,0x9a6b3a],['Solid white oak',/oak, solid|^white oak$/i,0xc47f2c],
   ['Bought-out oak panels and fronts',/bought out/i,0x4f8f6f],['Poplar',/poplar/i,0x93a35a],['Shop and sub top ply',/shop ply|plywood/i,0x8d8577],['Stone, steel, hardware',/./,0x9aa3ad]];
 const clsMat=CLS.map(c=>new THREE.MeshStandardMaterial({color:c[2],roughness:.7,side:THREE.DoubleSide,clippingPlanes:[clip]}));
 const hiC=new Map(),hi=(b,col,k)=>{const key=b.uuid+col;if(!hiC.has(key)){const c=b.clone();c.emissive=new THREE.Color(col);c.emissiveIntensity=k;hiC.set(key,c)}return hiC.get(key)};
+const clC={},clM=c=>clC[c]||(clC[c]=new THREE.MeshStandardMaterial({color:c,roughness:.9,emissive:c,emissiveIntensity:.55,envMapIntensity:0,side:THREE.DoubleSide,clippingPlanes:[clip]}));
 const hotC={},hotM=c=>hotC[c]||(hotC[c]=new THREE.MeshStandardMaterial({color:c,roughness:.6,emissive:c,emissiveIntensity:.25,side:THREE.DoubleSide,clippingPlanes:[clip]}));
 function refresh(){const is=S.issue>=0?ISS[S.issue]:null;parts.forEach(m=>{const u=m.userData,L=LINFO[u.layer];
   if(is){m.visible=is.show?is.show(u):is.layers.includes(u.layer);m.material=is.hot&&is.hot(u)?hotM(is.col||RED):(S.sel&&u.info===S.sel?hi(u.mat,0x1f8f6a,.45):u.mat);return}
   m.visible=L.on&&(S.step<0||L.step<=S.step)&&(S.showSD||!L.sd);
-  let b=u.mat;if(S.mat)b=clsMat[CLS.findIndex(c=>c[1].test(u.info.mat))];if(S.mark&&L.sd)b=FLAG;
+  let b=u.mat;if(S.call&&u.cl){m.material=(S.sel&&u.info===S.sel)?hi(clM(u.cl.col),0xffffff,.35):clM(u.cl.col);return}if(S.mat)b=clsMat[CLS.findIndex(c=>c[1].test(u.info.mat))];if(S.mark&&L.sd)b=FLAG;
   if(S.sel&&u.info===S.sel)b=hi(b,0x1f8f6a,.45);else if(S.step>=0&&L.step===S.step)b=hi(b,0x2f7fd0,.3);
   m.material=b})}
 
@@ -1652,7 +1657,9 @@ ex.addEventListener('input',applyExplode);
 const cut=document.getElementById('cut');cut.addEventListener('input',()=>{const v=+cut.value;clip.constant=v<=0?500:124-v*128;if(typeof pins!=='undefined')pins.visible=S.issue<0&&S.pins&&v<=0});
 const V={drawer:[165,80,-150],seat:[-45,75,195],end:[-170,55,-40],top:[60,260,24.01],under:[95,44,215],endb:[290,55,90],s12:[175,42,30],s13:[150,42,30],leg:[-52,42,-62]};
 function fit(p,t){const k=Math.max(1,1.3/cam.aspect);return [t[0]+(p[0]-t[0])*k,t[1]+(p[1]-t[1])*k,t[2]+(p[2]-t[2])*k]}
-function view(k){anim=null;const t=k==='leg'?[4,17,4]:k==='s12'?[44,18,24]:k==='s13'?[17,18,24]:[60,k==='under'?14:17,24],p=fit(V[k],t);cam.position.set(p[0],p[1],p[2]);ctl.target.set(t[0],t[1],t[2]);ctl.update()}
+const VC={drawer:[0,-1,68],seat:[0,1,68],end:[-1,0,30],endb:[1,0,30]};
+function elev(k){const e=VC[k],d=Math.max(e[2]/(0.287*cam.aspect),26/0.287)+ (e[0]?0:24);return e[0]?[60+e[0]*(60+d+40),19,24.01]:[60,19,24+e[1]*d]}
+function view(k){anim=null;const t=k==='leg'?[4,17,4]:k==='s12'?[44,18,24]:k==='s13'?[17,18,24]:[60,k==='under'?14:17,24],p=S.call&&VC[k]?elev(k):fit(V[k],t);if(S.call&&VC[k])t[1]=19;cam.position.set(p[0],p[1],p[2]);ctl.target.set(t[0],t[1],t[2]);ctl.update()}
 document.getElementById('views').addEventListener('click',e=>{const v=e.target.dataset.v;if(!v)return;if(S.issue>=0)setIssue(-1,true);
   cut.value=v==='s12'?(124-44)/128:v==='s13'?(124-17)/128:0;cut.dispatchEvent(new Event('input'));
   if(v==='under'){['stone','sub'].forEach(k=>{LINFO[k].on=false;document.getElementById('ly-'+k).checked=false});refresh()}view(v)});
@@ -1665,7 +1672,7 @@ function pick(e){const r=renderer.domElement.getBoundingClientRect();pt.set((e.c
   if(pins.visible){const ph=ray.intersectObjects(pins.children,false)[0];if(ph){setIssue(ph.object.userData.issue);return}}
   const h=ray.intersectObjects(parts.filter(m=>m.visible),false).filter(i=>i.object.isMesh&&clip.distanceToPoint(i.point)>=0)[0];
   S.sel=h?h.object.userData.info:null;refresh();if(!h)return;const inf=S.sel,L=LINFO[h.object.userData.layer];
-  document.getElementById('p-info').innerHTML='<div class="tag">'+esc(inf.cv)+' · step '+(L.step+1)+', '+esc(L.label)+'</div><h2>'+esc(inf.name)+(L.sd?'<span class="sd">Shop dwg</span>':'')+'</h2><dl><dt>'+(L.sd?'Size':'Cut size')+'</dt><dd>'+esc(inf.cut)+'</dd><dt>Material</dt><dd>'+esc(inf.mat)+'</dd></dl>'+(inf.note?'<div class="note">'+esc(inf.note)+'</div>':'')+'<p class="hint">Sizes in inches, width x length as printed on the Cabinet Vision sheets.</p>';showTab('info')}
+  document.getElementById('p-info').innerHTML='<div class="tag">'+esc(inf.cv)+' · step '+(L.step+1)+', '+esc(L.label)+'</div><h2>'+esc(inf.name)+(L.sd?'<span class="sd">Shop dwg</span>':'')+'</h2><dl><dt>'+(L.sd?'Size':'Cut size')+'</dt><dd>'+esc(inf.cut)+'</dd><dt>Material</dt><dd>'+esc(inf.mat)+'</dd></dl>'+(h.object.userData.cl?'<dl><dt>Cut list</dt><dd>'+esc(h.object.userData.cl.id)+'</dd><dt>Rip, cut to</dt><dd>'+esc(h.object.userData.cl.size)+'</dd></dl>':'')+(inf.note?'<div class="note">'+esc(inf.note)+'</div>':'')+'<p class="hint">Sizes in inches, width x length as printed on the Cabinet Vision sheets.</p>';showTab('info')}
 renderer.domElement.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);
 renderer.domElement.addEventListener('pointerup',e=>{if(down&&Math.hypot(e.clientX-down[0],e.clientY-down[1])<6)pick(e);down=null});
 function size(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.fov=32;cam.updateProjectionMatrix()}
@@ -1698,9 +1705,9 @@ const ISS=[
  {t:'Chase skin is longer than the sheet',s:'Each skin is listed 110-1/8 long on 4x8 shop ply. A sheet is 96, so each skin needs a joint.',pin:[108,36,30],cam:[60,62,185],tg:[60,19,30],
   layers:['toe','chase','legs','legdeco'],hot:u=>/blank panel/.test(u.info.name),col:BLUE,
   draw(){ghost(101.0625,115.1875,C1+0.5,C1+0.8,0,33.75,RED,.75);dim([5.0625,37,C1+1],[101.0625,37,C1+1],'One sheet: 96',BLUE,2.4,[0,3,0]);dim([5.0625,44,C1+1],[115.1875,44,C1+1],'Skin needed: 110-1/8',RED,2.4,[0,3,0]);lab('14-1/8\nmissing',[108.1,17,C1+1],2.2,RED)}},
- {t:'Top rail is thinner than the fillers',s:'Top rail face is 3/4 stock. The base fillers and bottom filler are 7/8. The faces sit 1/8 out of flush.',pin:[60,33,0],cam:[-1,43,-8],tg:[7.2,32.6,2],
+ {t:'Top rail: mill it 7/8, not 3/4',s:'The CV sheet lists the top rail face at 3/4. The face frame cut list mills every oak part to 7/8, which keeps it flush with the fillers. Follow the cut list.',col:GRN,pin:[60,33,0],cam:[-1,43,-8],tg:[7.2,32.6,2],
   layers:['box','face','legs','legdeco','toe'],hot:u=>u.info.name=='Top rail, face',
-  draw(){dim([9,33.78,1.5],[9,33.78,2.25],'Top rail: 3/4',RED,.3,[.6,.5,0]);dim([5.75,33.78,1.5],[5.75,33.78,2.375],'Filler: 7/8',BLUE,.3,[-.3,.9,0])}},
+  draw(){dim([9,33.78,1.5],[9,33.78,2.375],'Top rail: 7/8',GRN,.3,[.6,.5,0]);dim([5.75,33.78,1.5],[5.75,33.78,2.375],'Filler: 7/8',BLUE,.3,[-.3,.9,0])}},
  {t:'Leg faces were never cut',s:'CV cut a 4-1/8 ply box. The finished leg is 5 x 5 with two mitered, panelled faces. No part exists for those faces.',pin:[0,36,0],cam:[-32,52,-40],tg:[3,21,3],col:ORG,
   layers:['toe','box','face','ends','legs','legdeco'],hot:u=>u.layer=='legdeco',
   draw(){dim([0.875,34.6,-0.4],[5,34.6,-0.4],'CV box: 4-1/8',BLUE,.8,[0,1,0]);dim([0,37,-0.4],[5,37,-0.4],'Finished leg: 5',RED,.8,[0,1,0]);lab('No part cut\nfor these faces',[-2.5,14,-2.5],1,ORG)}},
@@ -1736,7 +1743,7 @@ function fly(p,t,inst){p=fit(p,t);if(inst){cam.position.set(p[0],p[1],p[2]);ctl.
   anim={p0:cam.position.clone(),t0:ctl.target.clone(),p1:new THREE.Vector3(p[0],p[1],p[2]),t1:new THREE.Vector3(t[0],t[1],t[2]),s:performance.now()}}
 const issEl=document.getElementById('iss'),gal=document.getElementById('gal');
 function setIssue(i,inst){const n=ISS.length;if(i>=n)i=0;if(i<-1)i=n-1;const was=S.issue;S.issue=i;while(ov.children.length)ov.remove(ov.children[0]);
-  issEl.hidden=i<0;stage.classList.toggle('issue',i>=0);dimG.visible=i<0&&S.dim;pins.visible=i<0&&S.pins;[...gal.children].forEach((b,k)=>b.setAttribute('aria-pressed',k===i));
+  issEl.hidden=i<0;document.getElementById('clkey').hidden=i>=0||!S.call;stage.classList.toggle('issue',i>=0);dimG.visible=i<0&&S.dim;pins.visible=i<0&&S.pins;[...gal.children].forEach((b,k)=>b.setAttribute('aria-pressed',k===i));
   if(i<0){clip.constant=500;cut.value=0;refresh();if(was>=0&&!inst)fly(V.drawer,[60,17,24]);return}
   const is=ISS[i];ex.value=0;applyExplode();S.sel=null;clip.constant=is.cut||500;cut.value=0;is.draw();fly(is.cam,is.tg,inst);
   document.getElementById('i-t').textContent=(i+1)+'. '+is.t;document.getElementById('i-s').textContent=is.s;refresh()}
@@ -1753,7 +1760,32 @@ setTimeout(()=>{try{const keep=[cam.position.clone(),ctl.target.clone(),cam.aspe
   renderer.setSize(640,400,false);cam.aspect=1.6;cam.fov=32;cam.updateProjectionMatrix();
   ISS.forEach((is,i)=>{setIssue(i,true);renderer.render(scene,cam);g.fillStyle=bg;g.fillRect(0,0,320,200);g.drawImage(renderer.domElement,0,0,320,200);gal.children[i].firstChild.src=c.toDataURL('image/jpeg',.8)});
   setIssue(-1,true);cam.position.copy(keep[0]);ctl.target.copy(keep[1]);size();ctl.update()}catch(e){}},900);
+
+/* ---------- face frame cut list callouts (Monterey Islands Cut List, seating island parts) ---------- */
+const callG=new THREE.Group();scene.add(callG);callG.visible=false;
+const RIP={'2-1/2':'#8e3fb0','2-1/4':'#d4279a','1-1/2':'#1f6fc0','3':'#3d8f3a'};
+function tagCL(pred,idf,rip,len,n,dh,chase){parts.filter(m=>pred(m.userData,m.userData.home)).forEach(m=>{const u=m.userData,id=typeof idf=='function'?idf(u.home):idf,size=rip+' x '+len;
+  u.cl={id,size,col:RIP[rip]};const k=chipTex(id+'\n'+size,RIP[rip]),sp=new THREE.Sprite(new THREE.SpriteMaterial({map:k.t,depthTest:false,transparent:true,toneMapped:false,sizeAttenuation:false}));
+  sp.userData.ar=k.w/k.h;sp.position.set(u.home.x+n[0]*1.2,u.home.y+(dh||0),u.home.z+n[2]*1.2);sp.renderOrder=25;sp.userData={ar:k.w/k.h,n:new THREE.Vector3(n[0],0,n[2]),mesh:m,chase:chase===true,knee:chase==='knee'};callG.add(sp)})}
+const nm=(name,cv)=>u=>u.info.name==name&&(!cv||u.info.cv==cv);
+tagCL(nm('Base filler, face','#2'),'SEAT 2 filler','1-1/2','30-1/2',[0,0,-1]);tagCL(nm('Base filler, face','#7'),'SEAT 7 filler','1-1/2','30-1/2',[0,0,-1]);
+tagCL(nm('Top rail, face'),'SEAT 9 filler','1-1/2','111-1/4',[0,0,-1],2.4);tagCL(nm('Bottom filler, face'),'SEAT 8 filler','2-1/4','111-1/4',[0,0,-1],-2.2);
+tagCL(nm('Seating wall frame, top rail'),'SEAT 12 top rail','1-1/2','107-1/4',[0,0,1],2.4);tagCL(nm('Seating wall frame, bottom rail'),'SEAT 12 bottom rail','1-1/2','107-1/4',[0,0,1],-2.2);
+tagCL(nm('Seating wall frame, left stile'),'SEAT 12 L','1-1/2','29-3/4',[0,0,1],6);tagCL(nm('Seating wall frame, right stile'),'SEAT 12 R','1-1/2','29-3/4',[0,0,1],6);
+tagCL(nm('Seating wall frame, mid stile'),'SEAT 12 mid','1-1/2','26-3/4',[0,0,1]);
+[['#14',[-1,0,0],h=>h.z<24?'L':'R'],['#17',[1,0,0],h=>h.z<24?'R':'L']].forEach(e=>{const c=e[0].slice(1);
+  tagCL(nm('Finish end panel, stile',e[0]),h=>'SEAT '+c+' '+e[2](h),'2-1/2','29-3/4',e[1],5);tagCL(nm('Finish end panel, mid stile',e[0]),'SEAT '+c+' mid','1-1/2','26-3/4',e[1],-3);
+  tagCL(nm('Finish end panel, top rail',e[0]),'SEAT '+c+' top rail','1-1/2','35',e[1],2.4);tagCL(nm('Finish end panel, bottom rail',e[0]),'SEAT '+c+' bottom rail','1-1/2','35',e[1],-2.2)});
+[['#15',[1,0,0],'L','R'],['#16',[-1,0,0],'R','L']].forEach(e=>{const c=e[0].slice(1);
+  tagCL(u=>nm('Finish end panel, stile',e[0])(u)&&u.home.z<35,'SEAT '+c+' '+e[2],'1-1/2','29-3/4',e[1],6,'knee');tagCL(u=>nm('Finish end panel, stile',e[0])(u)&&u.home.z>=35,'SEAT '+c+' '+e[3],'2-1/2','29-3/4',e[1],-4,'knee');
+  tagCL(nm('Finish end panel, top rail',e[0]),'SEAT '+c+' top rail','1-1/2','15-1/8',e[1],2.4,'knee');tagCL(nm('Finish end panel, bottom rail',e[0]),'SEAT '+c+' bottom rail','1-1/2','15-1/8',e[1],-2.2,'knee')});
+tagCL(nm('Chase wall, top plate'),'SEAT chase top','3','110-1/4',[0,0,1],2.4,true);tagCL(nm('Chase wall, bottom plate'),'SEAT chase bottom','3','110-1/4',[0,0,1],2.4,true);
+tagCL(nm('Chase wall, stud'),'SEAT chase stud','3','31-3/4',[0,0,1],0,true);
+const _v=new THREE.Vector3();
+function callTick(){callG.visible=S.call&&S.issue<0;if(S.issue<0)pins.visible=S.pins&&!S.call&&+cut.value<=0;if(!callG.visible)return;const wallUp=LINFO.wall.on&&(S.step<0||S.step>=LINFO.wall.step),sc=0.573*Math.min(34,stage.clientHeight*0.06)/stage.clientHeight;
+  callG.children.forEach(sp=>{const d=sp.userData;sp.scale.set(sc*d.ar,sc,1);sp.visible=d.mesh.visible&&!(d.chase&&wallUp)&&!(d.knee&&cam.position.z<34)&&_v.copy(cam.position).sub(sp.position).setY(0).normalize().dot(d.n)>0.35;})}
+document.getElementById('t-call').addEventListener('click',()=>{S.call=!S.call;document.getElementById('t-call').setAttribute('aria-pressed',S.call);document.getElementById('clkey').hidden=!S.call;if(S.call&&S.issue>=0)setIssue(-1,true);refresh()});
 window.__t={setIssue,view,setStep,S,refresh,ex:v=>{ex.value=v;applyExplode()},cut:v=>{cut.value=v;cut.dispatchEvent(new Event('input'))},layers:setLayers};
-(function loop(){requestAnimationFrame(loop);if(anim){const k=Math.min(1,(performance.now()-anim.s)/650),e=k*k*(3-2*k);cam.position.lerpVectors(anim.p0,anim.p1,e);ctl.target.lerpVectors(anim.t0,anim.t1,e);if(k>=1)anim=null}ctl.update();renderer.render(scene,cam)})();
+(function loop(){requestAnimationFrame(loop);if(anim){const k=Math.min(1,(performance.now()-anim.s)/650),e=k*k*(3-2*k);cam.position.lerpVectors(anim.p0,anim.p1,e);ctl.target.lerpVectors(anim.t0,anim.t1,e);if(k>=1)anim=null}ctl.update();callTick();renderer.render(scene,cam)})();
 })();
 </script>
